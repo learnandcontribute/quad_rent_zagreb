@@ -3,1907 +3,397 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Quad avanture za obitelji, parove i grupe u okolici Zagreba. Nova vozila, oprema uključena, 15+ ruta.">
-<title>Quad Rent Zagreb — Quad avanture Zagreb</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
-
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-
-:root {
-  /* Polaris Adventures-inspired palette */
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #111111;
-  --bg-card: #1a1a1a;
-  --bg-card-hover: #222222;
-  --bg-elevated: #252525;
-  
-  --text-primary: #ffffff;
-  --text-secondary: #b0b0b0;
-  --text-muted: #666666;
-  --text-dim: #444444;
-  
-  /* Yellow/Amber accent like Polaris */
-  --accent: #F5A623;
-  --accent-hover: #FFBA42;
-  --accent-dim: #c4851c;
-  --accent-glow: rgba(245,166,35,0.15);
-  
-  --success: #4CAF50;
-  --border: rgba(255,255,255,0.08);
-  --border-hover: rgba(255,255,255,0.15);
-  
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 20px;
-  --radius-full: 9999px;
-  
-  --font-display: 'Outfit', sans-serif;
-  --font-body: 'Plus Jakarta Sans', sans-serif;
-  
-  --max-w: 1280px;
-  --gutter: 1rem;
-}
-
-html { scroll-behavior: smooth; overflow-x: hidden; }
-
-body {
-  font-family: var(--font-body);
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  line-height: 1.6;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
-
-img { max-width: 100%; display: block; }
-a { color: inherit; text-decoration: none; }
-
-.container { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter); }
-
-/* ═══ BUTTONS ═══ */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.82rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: var(--radius-full);
-  border: none;
-  cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.btn--accent {
-  background: var(--accent);
-  color: #000;
-}
-.btn--accent:hover {
-  background: var(--accent-hover);
-  box-shadow: 0 8px 32px rgba(245,166,35,0.3);
-  transform: translateY(-1px);
-}
-
-.btn--ghost {
-  background: rgba(255,255,255,0.06);
-  color: var(--text-primary);
-  border: 1px solid var(--border);
-}
-.btn--ghost:hover {
-  background: rgba(255,255,255,0.1);
-  border-color: var(--border-hover);
-}
-
-.btn--outline {
-  background: transparent;
-  color: var(--text-primary);
-  border: 1.5px solid var(--accent);
-}
-.btn--outline:hover {
-  background: var(--accent);
-  color: #000;
-}
-
-.btn svg { width: 16px; height: 16px; }
-
-/* ═══ IMAGE PLACEHOLDERS ═══ */
-.ph {
-  background: var(--bg-card);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.ph::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(245,166,35,0.03) 0%, transparent 50%);
-}
-
-.ph span {
-  font-family: var(--font-body);
-  font-size: 0.55rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  position: relative;
-  z-index: 1;
-}
-
-/* ═══ CHIPS / TAGS ═══ */
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  padding: 0.3rem 0.7rem;
-  background: rgba(255,255,255,0.06);
-  border-radius: var(--radius-full);
-  font-family: var(--font-body);
-  font-size: 0.62rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-}
-
-.chip--accent {
-  background: var(--accent-glow);
-  color: var(--accent);
-}
-
-/* ═══════════════════════════════════════
-   NAV
-   ═══════════════════════════════════════ */
-.nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  padding: 0.8rem 0;
-  transition: all 0.4s;
-}
-
-.nav.scrolled {
-  background: rgba(10,10,10,0.88);
-  backdrop-filter: blur(24px) saturate(1.4);
-  border-bottom: 1px solid var(--border);
-}
-
-.nav__inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.nav__logo {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 1.1rem;
-  letter-spacing: 0.06em;
-  color: var(--text-primary);
-  text-transform: uppercase;
-}
-
-.nav__logo small {
-  display: block;
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: 0.42rem;
-  letter-spacing: 0.12em;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  margin-top: 1px;
-}
-
-.nav__links {
-  display: none;
-  gap: 1.8rem;
-  align-items: center;
-}
-
-.nav__links a {
-  font-size: 0.72rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  transition: color 0.2s;
-}
-
-.nav__links a:hover { color: var(--accent); }
-
-.nav__book { display: none; }
-
-.nav__hamburger {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px;
-}
-
-.nav__hamburger span {
-  width: 22px;
-  height: 1.5px;
-  background: var(--text-primary);
-  transition: all 0.3s;
-  border-radius: 2px;
-}
-
-/* mobile menu */
-.mobile-menu {
-  position: fixed;
-  inset: 0;
-  background: var(--bg-primary);
-  z-index: 99;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1.8rem;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s;
-}
-
-.mobile-menu.open { opacity: 1; pointer-events: all; }
-
-.mobile-menu a {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  transition: color 0.2s;
-}
-
-.mobile-menu a:hover { color: var(--accent); }
-
-/* ═══════════════════════════════════════
-   HERO — full viewport, cinematic
-   ═══════════════════════════════════════ */
-.hero {
-  position: relative;
-  height: 100vh;
-  height: 100svh;
-  display: flex;
-  align-items: flex-end;
-  overflow: hidden;
-}
-
-.hero__bg {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(160deg, #1a1a18 0%, #0d0d0c 40%, #080808 100%);
-}
-
-.hero__bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top,
-    var(--bg-primary) 0%,
-    rgba(10,10,10,0.6) 35%,
-    rgba(10,10,10,0.15) 60%,
-    transparent 100%
-  );
-}
-
-.hero__bg-label {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  font-size: 0.45rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  z-index: 1;
-  text-align: center;
-}
-
-/* play overlay */
-.hero__play {
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  z-index: 3;
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  border: 2px solid rgba(255,255,255,0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  backdrop-filter: blur(8px);
-  background: rgba(255,255,255,0.05);
-  transition: all 0.3s;
-}
-
-.hero__play:hover {
-  border-color: var(--accent);
-  background: rgba(245,166,35,0.1);
-  transform: translate(-50%,-50%) scale(1.08);
-}
-
-.hero__play::after {
-  content: '';
-  border-left: 14px solid #fff;
-  border-top: 8px solid transparent;
-  border-bottom: 8px solid transparent;
-  margin-left: 3px;
-}
-
-.hero__content {
-  position: relative;
-  z-index: 3;
-  padding-bottom: 3rem;
-  width: 100%;
-}
-
-.hero__overline {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.55rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 1rem;
-}
-
-.hero__overline::before {
-  content: '';
-  width: 24px;
-  height: 2px;
-  background: var(--accent);
-  border-radius: 2px;
-}
-
-.hero__headline {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2.5rem, 7vw, 5.5rem);
-  line-height: 0.95;
-  letter-spacing: -0.03em;
-  color: var(--text-primary);
-  margin-bottom: 1rem;
-}
-
-.hero__headline span {
-  display: block;
-  color: var(--text-secondary);
-  font-weight: 400;
-  font-size: 0.45em;
-  letter-spacing: 0;
-  line-height: 1.5;
-  margin-top: 0.6rem;
-}
-
-.hero__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-bottom: 2rem;
-}
-
-/* hero quick stats */
-.hero__stats {
-  display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  padding-top: 1.2rem;
-  border-top: 1px solid var(--border);
-}
-
-.hero__stat { display: flex; flex-direction: column; gap: 0.1rem; }
-
-.hero__stat-val {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.3rem;
-  color: var(--text-primary);
-}
-
-.hero__stat-label {
-  font-size: 0.52rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-
-/* ═══════════════════════════════════════
-   CATEGORIES — scrollable cards (Polaris style)
-   ═══════════════════════════════════════ */
-.categories {
-  padding: 4rem 0 3rem;
-  overflow: hidden;
-}
-
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.section-title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(1.3rem, 3.5vw, 2rem);
-  letter-spacing: -0.02em;
-}
-
-.section-sub {
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  font-weight: 400;
-}
-
-.cat-scroll {
-  display: flex;
-  gap: 0.8rem;
-  overflow-x: auto;
-  padding-bottom: 1rem;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-
-.cat-scroll::-webkit-scrollbar { display: none; }
-
-.cat-card {
-  flex: 0 0 260px;
-  scroll-snap-align: start;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  position: relative;
-  cursor: pointer;
-  transition: transform 0.3s;
-}
-
-.cat-card:hover { transform: translateY(-4px); }
-
-.cat-card__img {
-  aspect-ratio: 3/4;
-  border-radius: var(--radius-lg);
-}
-
-.cat-card__overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1.2rem;
-  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-}
-
-.cat-card__title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1rem;
-  color: #fff;
-  margin-bottom: 0.2rem;
-}
-
-.cat-card__desc {
-  font-size: 0.6rem;
-  color: rgba(255,255,255,0.6);
-  font-weight: 400;
-}
-
-/* ═══════════════════════════════════════
-   FEATURED — big card spotlight
-   ═══════════════════════════════════════ */
-.featured {
-  padding: 2rem 0 4rem;
-}
-
-.featured__card {
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  background: var(--bg-card);
-  display: grid;
-  grid-template-columns: 1fr;
-}
-
-.featured__img {
-  aspect-ratio: 16/10;
-  min-height: 280px;
-}
-
-.featured__body {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  justify-content: center;
-}
-
-.featured__overline {
-  font-size: 0.55rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-
-.featured__title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(1.4rem, 3.5vw, 2.2rem);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-}
-
-.featured__desc {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  font-weight: 300;
-  line-height: 1.7;
-  max-width: 460px;
-}
-
-.featured__specs {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-/* ═══════════════════════════════════════
-   KIDS — highlighted dark card
-   ═══════════════════════════════════════ */
-.kids {
-  padding: 0 0 4rem;
-}
-
-.kids__card {
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  background: linear-gradient(135deg, #1c1c18 0%, #141410 100%);
-  border: 1px solid rgba(245,166,35,0.12);
-  display: grid;
-  grid-template-columns: 1fr;
-  position: relative;
-}
-
-.kids__badge {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  z-index: 5;
-  background: var(--accent);
-  color: #000;
-  font-family: var(--font-body);
-  font-size: 0.55rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  padding: 0.3rem 0.8rem;
-  border-radius: var(--radius-full);
-  text-transform: uppercase;
-}
-
-.kids__img {
-  aspect-ratio: 16/10;
-  min-height: 260px;
-}
-
-.kids__body {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.kids__title {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(1.6rem, 4.5vw, 2.8rem);
-  line-height: 1;
-  letter-spacing: -0.02em;
-}
-
-.kids__sub {
-  font-size: 0.78rem;
-  color: var(--text-secondary);
-  font-weight: 300;
-  line-height: 1.7;
-  max-width: 440px;
-}
-
-.kids__info-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.6rem;
-}
-
-.kids__info-item {
-  background: rgba(255,255,255,0.04);
-  border-radius: var(--radius-md);
-  padding: 0.8rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
-}
-
-.kids__info-val {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.2rem;
-  color: var(--accent);
-}
-
-.kids__info-label {
-  font-size: 0.52rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.kids__prices {
-  display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  padding-top: 0.8rem;
-  border-top: 1px solid var(--border);
-}
-
-.kids__price { display: flex; flex-direction: column; }
-.kids__price-val { font-family: var(--font-display); font-weight: 700; font-size: 1.6rem; }
-.kids__price-label { font-size: 0.5rem; color: var(--text-muted); letter-spacing: 0.04em; }
-
-/* ═══════════════════════════════════════
-   PRICING — clean cards
-   ═══════════════════════════════════════ */
-.pricing {
-  padding: 4rem 0;
-}
-
-.pricing__grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-}
-
-.pricing__card {
-  background: var(--bg-card);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  border: 1px solid var(--border);
-  transition: border-color 0.3s;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.pricing__card:hover { border-color: var(--border-hover); }
-
-.pricing__card--pop {
-  border-color: var(--accent-dim);
-  background: linear-gradient(180deg, rgba(245,166,35,0.04) 0%, var(--bg-card) 40%);
-}
-
-.pricing__card-badge {
-  position: absolute;
-  top: -0.6rem;
-  right: 1rem;
-  background: var(--accent);
-  color: #000;
-  font-size: 0.5rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding: 0.2rem 0.6rem;
-  border-radius: var(--radius-full);
-}
-
-.pricing__card-type {
-  font-size: 0.58rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-
-.pricing__card-price {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 2.5rem;
-  line-height: 1;
-  color: var(--text-primary);
-}
-
-.pricing__card-price small {
-  font-size: 0.35em;
-  font-weight: 400;
-  color: var(--text-muted);
-  margin-left: 0.3rem;
-}
-
-.pricing__card-duration {
-  font-size: 0.72rem;
-  color: var(--text-secondary);
-  font-weight: 300;
-}
-
-.pricing__card-features {
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-  padding-top: 0.8rem;
-  border-top: 1px solid var(--border);
-  flex: 1;
-}
-
-.pricing__card-features li {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.72rem;
-  color: var(--text-secondary);
-  font-weight: 400;
-  list-style: none;
-}
-
-.pricing__card-features li::before {
-  content: '';
-  width: 5px;
-  height: 5px;
-  background: var(--accent);
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.pricing__card .btn { margin-top: auto; }
-
-/* ═══════════════════════════════════════
-   ROUTES
-   ═══════════════════════════════════════ */
-.routes {
-  padding: 4rem 0;
-}
-
-.routes__layout {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-
-.routes__map {
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  min-height: 300px;
-  position: relative;
-  background: linear-gradient(135deg, #1a2118 0%, #111310 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.routes__map-big {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(4rem, 14vw, 8rem);
-  color: rgba(245,166,35,0.08);
-  line-height: 1;
-  position: absolute;
-  z-index: 0;
-}
-
-.routes__map span {
-  position: relative;
-  z-index: 1;
-  font-size: 0.5rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-}
-
-.routes__list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.route-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.85rem 0;
-  border-bottom: 1px solid var(--border);
-  gap: 0.5rem;
-  transition: background 0.2s;
-  cursor: pointer;
-}
-
-.route-row:hover { background: rgba(255,255,255,0.02); }
-
-.route-row__left { display: flex; flex-direction: column; gap: 0.1rem; }
-.route-row__name { font-family: var(--font-display); font-weight: 600; font-size: 0.88rem; }
-.route-row__meta { font-size: 0.52rem; color: var(--text-muted); }
-.route-row__diff { display: flex; gap: 3px; }
-.route-row__diff i {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  border: 1.5px solid var(--accent-dim);
-  font-style: normal;
-}
-.route-row__diff i.f { background: var(--accent); border-color: var(--accent); }
-
-/* ═══════════════════════════════════════
-   GALLERY — masonry-ish grid
-   ═══════════════════════════════════════ */
-.gallery {
-  padding: 4rem 0;
-}
-
-.gallery__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.4rem;
-}
-
-.gallery__item {
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  aspect-ratio: 1;
-  position: relative;
-  cursor: pointer;
-  transition: opacity 0.3s;
-}
-
-.gallery__item:hover { opacity: 0.85; }
-.gallery__item--tall { grid-row: span 2; aspect-ratio: auto; }
-.gallery__item--wide { grid-column: span 2; aspect-ratio: 21/9; }
-
-/* ═══════════════════════════════════════
-   TRUST BAR — horizontal icons
-   ═══════════════════════════════════════ */
-.trust-bar {
-  padding: 3rem 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
-.trust-bar__grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-}
-
-.trust-bar__item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 0.5rem;
-}
-
-.trust-bar__icon {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-md);
-  background: var(--accent-glow);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--accent);
-}
-
-.trust-bar__icon svg { width: 20px; height: 20px; }
-
-.trust-bar__title {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 0.78rem;
-}
-
-.trust-bar__text {
-  font-size: 0.62rem;
-  color: var(--text-muted);
-  line-height: 1.55;
-  max-width: 200px;
-}
-
-/* ═══════════════════════════════════════
-   FAQ
-   ═══════════════════════════════════════ */
-.faq {
-  padding: 4rem 0;
-}
-
-.faq__list { max-width: 700px; }
-
-.faq__item {
-  border-bottom: 1px solid var(--border);
-}
-
-.faq__q {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.9rem 0;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: var(--font-body);
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: var(--text-primary);
-  text-align: left;
-  gap: 0.5rem;
-}
-
-.faq__q:hover { color: var(--accent); }
-
-.faq__toggle {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.04);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  font-size: 1rem;
-  color: var(--text-muted);
-  transition: all 0.3s;
-}
-
-.faq__item.open .faq__toggle {
-  background: var(--accent-glow);
-  color: var(--accent);
-  transform: rotate(45deg);
-}
-
-.faq__a {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease;
-}
-
-.faq__item.open .faq__a { max-height: 250px; }
-
-.faq__a p {
-  font-size: 0.74rem;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  font-weight: 300;
-  padding-bottom: 0.8rem;
-  max-width: 550px;
-}
-
-/* ═══════════════════════════════════════
-   CTA BANNER
-   ═══════════════════════════════════════ */
-.cta-banner {
-  padding: 4rem 0;
-}
-
-.cta-banner__card {
-  background: linear-gradient(135deg, #1a1a18, #111);
-  border-radius: var(--radius-xl);
-  padding: 2.5rem 1.5rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  border: 1px solid var(--border);
-  position: relative;
-  overflow: hidden;
-}
-
-.cta-banner__card::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at 50% 80%, rgba(245,166,35,0.06) 0%, transparent 50%);
-  pointer-events: none;
-}
-
-.cta-banner__title {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(1.6rem, 4.5vw, 2.5rem);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  position: relative;
-}
-
-.cta-banner__sub {
-  font-size: 0.78rem;
-  color: var(--text-secondary);
-  font-weight: 300;
-  max-width: 380px;
-  position: relative;
-}
-
-.cta-banner__phone {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 1rem;
-  color: var(--accent);
-  position: relative;
-}
-
-/* ═══════════════════════════════════════
-   FOOTER
-   ═══════════════════════════════════════ */
-.footer {
-  padding: 3rem 0 1.5rem;
-  border-top: 1px solid var(--border);
-}
-
-.footer__top {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.footer__brand {
-  grid-column: 1 / -1;
-  margin-bottom: 0.5rem;
-}
-
-.footer__brand p {
-  font-size: 0.62rem;
-  color: var(--text-muted);
-  line-height: 1.6;
-  max-width: 280px;
-  margin-top: 0.5rem;
-}
-
-.footer__col-title {
-  font-size: 0.48rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 0.6rem;
-}
-
-.footer__links li { margin-bottom: 0.3rem; }
-.footer__links a { font-size: 0.68rem; color: var(--text-muted); transition: color 0.2s; }
-.footer__links a:hover { color: var(--accent); }
-
-.footer__bottom {
-  padding-top: 1rem;
-  border-top: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-
-.footer__bottom p { font-size: 0.48rem; color: var(--text-dim); }
-
-.footer__socials { display: flex; gap: 0.5rem; }
-.footer__socials a {
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-md);
-  background: rgba(255,255,255,0.04);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.52rem;
-  color: var(--text-muted);
-  font-weight: 600;
-  transition: all 0.2s;
-}
-.footer__socials a:hover { background: var(--accent-glow); color: var(--accent); }
-
-/* ═══════════════════════════════════════
-   RESPONSIVE
-   ═══════════════════════════════════════ */
-@media (min-width: 640px) {
-  :root { --gutter: 1.5rem; }
-  .trust-bar__grid { grid-template-columns: repeat(4, 1fr); }
-  .pricing__grid { grid-template-columns: repeat(2, 1fr); }
-  .gallery__grid { grid-template-columns: repeat(3, 1fr); }
-  .footer__top { grid-template-columns: 2fr 1fr 1fr; }
-  .footer__brand { grid-column: auto; }
-}
-
-@media (min-width: 960px) {
-  :root { --gutter: 2rem; }
-  .nav__links { display: flex; }
-  .nav__book { display: inline-flex; }
-  .nav__hamburger { display: none; }
-  .featured__card { grid-template-columns: 1.2fr 1fr; }
-  .featured__img { min-height: 400px; aspect-ratio: auto; }
-  .kids__card { grid-template-columns: 1fr 1.1fr; }
-  .kids__img { min-height: auto; aspect-ratio: auto; }
-  .pricing__grid { grid-template-columns: repeat(3, 1fr); }
-  .routes__layout { grid-template-columns: 1.3fr 1fr; }
-  .gallery__grid { grid-template-columns: repeat(4, 1fr); }
-  .footer__top { grid-template-columns: 2fr 1fr 1fr 1fr; }
-  .trust-bar__grid { grid-template-columns: repeat(5, 1fr); }
-  .cta-banner__card { padding: 4rem 2rem; }
-  .cta-banner__card > div { grid-template-columns: 1fr 1fr; }
-  #reviews-grid { grid-template-columns: repeat(3, 1fr); }
-  .routes__options { grid-template-columns: 1fr 1fr !important; }
-}
-
-/* ═══════════════════════════════════════
-   BOOKING MODAL
-   ═══════════════════════════════════════ */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.35s;
-}
-.modal-overlay.open { opacity: 1; pointer-events: all; }
-
-.modal {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  width: 100%;
-  max-width: 440px;
-  max-height: 90vh;
-  overflow-y: auto;
-  padding: 1.5rem;
-  position: relative;
-  transform: translateY(20px) scale(0.97);
-  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
-}
-.modal-overlay.open .modal { transform: translateY(0) scale(1); }
-
-.modal__close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.06);
-  border: none;
-  color: var(--text-muted);
-  font-size: 1.1rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-}
-.modal__close:hover { background: rgba(255,255,255,0.1); color: var(--text-primary); }
-
-.modal__title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.2rem;
-  margin-bottom: 0.3rem;
-}
-
-.modal__sub {
-  font-size: 0.68rem;
-  color: var(--text-muted);
-  margin-bottom: 1.2rem;
-}
-
-.modal__group {
-  margin-bottom: 1rem;
-}
-
-.modal__label {
-  display: block;
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 0.4rem;
-}
-
-/* Toggle buttons for type/duration */
-.modal__toggle {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.4rem;
-}
-
-.modal__toggle-btn {
-  padding: 0.65rem 0.5rem;
-  background: rgba(255,255,255,0.04);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-md);
-  font-family: var(--font-body);
-  font-size: 0.72rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: all 0.2s;
-  text-align: center;
-}
-
-.modal__toggle-btn:hover { border-color: var(--border-hover); }
-
-.modal__toggle-btn.active {
-  border-color: var(--accent);
-  background: var(--accent-glow);
-  color: var(--accent);
-}
-
-.modal__toggle-btn .toggle-price {
-  display: block;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1rem;
-  margin-top: 0.15rem;
-  color: var(--text-primary);
-}
-
-.modal__toggle-btn.active .toggle-price { color: var(--accent); }
-
-/* inputs */
-.modal__input {
-  width: 100%;
-  padding: 0.65rem 0.8rem;
-  background: rgba(255,255,255,0.04);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-md);
-  font-family: var(--font-body);
-  font-size: 0.78rem;
-  color: var(--text-primary);
-  outline: none;
-  transition: border-color 0.2s;
-  -webkit-appearance: none;
-}
-
-.modal__input:focus { border-color: var(--accent); }
-.modal__input::placeholder { color: var(--text-dim); }
-
-/* date input fix */
-.modal__input[type="date"] { color-scheme: dark; }
-
-/* stepper for persons */
-.modal__stepper {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.modal__stepper-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.06);
-  border: 1.5px solid var(--border);
-  color: var(--text-primary);
-  font-size: 1.1rem;
-  font-weight: 500;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-  font-family: var(--font-body);
-}
-
-.modal__stepper-btn:hover { border-color: var(--accent); color: var(--accent); }
-
-.modal__stepper-val {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.2rem;
-  min-width: 28px;
-  text-align: center;
-}
-
-/* summary */
-.modal__summary {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 0.8rem;
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-
-.modal__summary-row {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.68rem;
-  color: var(--text-secondary);
-}
-
-.modal__summary-row span:last-child { font-weight: 600; color: var(--text-primary); }
-
-.modal__summary-total {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 0.4rem;
-  border-top: 1px solid var(--border);
-  font-size: 0.78rem;
-  font-weight: 600;
-}
-
-.modal__summary-total span:last-child {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 1.1rem;
-  color: var(--accent);
-}
-
-.modal__wa-btn {
-  width: 100%;
-  padding: 0.85rem;
-  font-size: 0.85rem;
-}
-
-.modal__wa-btn svg { width: 18px; height: 18px; }
-
-.modal__note {
-  text-align: center;
-  font-size: 0.52rem;
-  color: var(--text-dim);
-  margin-top: 0.6rem;
-}
-
-/* ═══ SCROLL REVEAL ═══ */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
-}
-.reveal.visible { opacity: 1; transform: translateY(0); }
-</style>
+<meta name="description" content="Najam quadova Zagreb — 10 novih quadova, 15+ off-road ruta, dječji quadovi od 6 god. Oprema uključena, fleksibilni paketi. Rezervirajte putem WhatsAppa.">
+<title>Quad Rent Zagreb — Najam quadova i off-road avanture</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <!-- MOBILE MENU -->
-<div class="mobile-menu" id="mm">
-  <a href="#vehicle" onclick="toggleMenu()">Quad</a>
-  <a href="#kids" onclick="toggleMenu()">Obitelj</a>
-  <a href="#pricing" onclick="toggleMenu()">Cijene</a>
-  <a href="#routes" onclick="toggleMenu()">Rute</a>
-  <a href="#gallery" onclick="toggleMenu()">Galerija</a>
-  <a href="#faq" onclick="toggleMenu()">Pitanja</a>
-  <a href="#contact" onclick="toggleMenu()">Kontakt</a>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">Početna</a>
+  <a href="quad.html" onclick="toggleMenu()">Flota</a>
+  <a href="obitelj.html" onclick="toggleMenu()">Obitelj</a>
+  <a href="cijene.html" onclick="toggleMenu()">Cijene</a>
+  <a href="rute.html" onclick="toggleMenu()">Rute</a>
+  <a href="faq.html" onclick="toggleMenu()">Pitanja</a>
+  <a href="kontakt.html" onclick="toggleMenu()">Kontakt</a>
+  <a href="blog.html" onclick="toggleMenu()">Blog</a>
 </div>
 
 <!-- NAV -->
 <nav class="nav" id="nav">
   <div class="container nav__inner">
-    <a href="#" class="nav__logo">QUAD RENT ZAGREB <small>Quad avanture · okolica Zagreba</small></a>
+    <a href="index.html" class="nav__logo">Quad Rent Zagreb<small>Najam quadova · okolica Zagreba</small></a>
     <div class="nav__links">
-      <a href="#vehicle">Quad</a>
-      <a href="#kids">Obitelj</a>
-      <a href="#pricing">Cijene</a>
-      <a href="#routes">Rute</a>
-      <a href="#gallery">Galerija</a>
-      <a href="#faq">Pitanja</a>
+      <a href="quad.html">Flota</a>
+      <a href="obitelj.html">Obitelj</a>
+      <a href="cijene.html">Cijene</a>
+      <a href="rute.html">Rute</a>
+      <a href="faq.html">Pitanja</a>
+      <a href="kontakt.html">Kontakt</a>
+      <a href="blog.html">Blog</a>
     </div>
-    <button class="btn btn--accent nav__book" onclick="openBooking()">Rezerviraj</button>
-    <button class="nav__hamburger" id="hb" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+    <button class="btn btn--accent btn--sm nav__book" onclick="openBooking()">Rezerviraj</button>
+    <button class="nav__hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Izbornik"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- ═══ HERO ═══ -->
 <section class="hero">
   <div class="hero__bg ph">
     <span class="hero__bg-label">Fullscreen video — quad kroz šumu, cinematic drone</span>
   </div>
   <div class="hero__play"></div>
   <div class="container hero__content">
-    <div class="hero__overline">Okolica Zagreba</div>
-    <h1 class="hero__headline">Makni se<br>s asfalta.<span>Quad avanture u okolici Zagreba. Šuma, teren i nekoliko sati bez grada.</span></h1>
+    <div class="section-overline">Okolica Zagreba · Novo Zagreb</div>
+    <h1 class="hero__headline" style="margin-top:0.6rem">Vrijeme je da<br>zamijenite ekran<br>avanturom.</h1>
+    <p class="hero__sub">10 potpuno novih quadova. 15+ off-road ruta. Oprema, obuka i gorivo — sve uključeno. Vaša jedina briga je stisnuti gas.</p>
     <div class="hero__actions">
       <button class="btn btn--accent" onclick="openBooking()">Rezerviraj vožnju →</button>
-      <a href="#pricing" class="btn btn--ghost">Pogledaj cijene</a>
+      <a href="cijene.html" class="btn btn--ghost">Pogledaj cijene</a>
     </div>
     <div class="hero__stats">
-      <div class="hero__stat"><div class="hero__stat-val">od €80</div><div class="hero__stat-label">Odrasli</div></div>
-      <div class="hero__stat"><div class="hero__stat-val">od €60</div><div class="hero__stat-label">Djeca</div></div>
+      <div class="hero__stat"><div class="hero__stat-val">10</div><div class="hero__stat-label">Quadova</div></div>
+      <div class="hero__stat"><div class="hero__stat-val">od €80</div><div class="hero__stat-label">Pola dana</div></div>
       <div class="hero__stat"><div class="hero__stat-val">15+</div><div class="hero__stat-label">Ruta</div></div>
-      <div class="hero__stat"><div class="hero__stat-val">550cc</div><div class="hero__stat-label">Motor</div></div>
+      <div class="hero__stat"><div class="hero__stat-val">16 god</div><div class="hero__stat-label">Iskustva</div></div>
     </div>
   </div>
 </section>
 
-<!-- CATEGORIES — scrollable cards -->
-<section class="categories reveal">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">Izaberi avanturu</h2>
-      <span class="section-sub">Scroll →</span>
-    </div>
-  </div>
-  <div class="container">
-    <div class="cat-scroll">
-      <div class="cat-card">
-        <div class="cat-card__img ph"><span>Foto — ekipa na stazi</span></div>
-        <div class="cat-card__overlay">
-          <div class="cat-card__title">Ekipa & prijatelji</div>
-          <div class="cat-card__desc">Momačke, team building, vikend</div>
-        </div>
-      </div>
-      <div class="cat-card">
-        <div class="cat-card__img ph" style="background:#1c1c18"><span>Foto — obitelj na quadu</span></div>
-        <div class="cat-card__overlay">
-          <div class="cat-card__title">Obitelj s djecom</div>
-          <div class="cat-card__desc">Dječji quadovi od 9 godina</div>
-        </div>
-      </div>
-      <div class="cat-card">
-        <div class="cat-card__img ph" style="background:#1a1816"><span>Foto — par na stazi</span></div>
-        <div class="cat-card__overlay">
-          <div class="cat-card__title">Parovi</div>
-          <div class="cat-card__desc">Romantična quad avantura</div>
-        </div>
-      </div>
-      <div class="cat-card">
-        <div class="cat-card__img ph" style="background:#181a16"><span>Foto — solo vozač</span></div>
-        <div class="cat-card__overlay">
-          <div class="cat-card__title">Solo avantura</div>
-          <div class="cat-card__desc">Tvoja ruta, tvoj tempo</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TRUST BAR -->
-<div class="trust-bar reveal">
+<!-- ═══ TRUST BAR ═══ -->
+<section class="trust-bar reveal">
   <div class="container">
     <div class="trust-bar__grid">
       <div class="trust-bar__item">
         <div class="trust-bar__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-        <div class="trust-bar__title">Nova vozila</div>
-        <div class="trust-bar__text">Potpuno novi quadovi, ne stari s 10.000+ km</div>
+        <div class="trust-bar__title">10 novih quadova</div>
+        <div class="trust-bar__text">Potpuno nova flota, 4 modela, 550cc do 1000cc</div>
       </div>
       <div class="trust-bar__item">
         <div class="trust-bar__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <div class="trust-bar__title">Oprema gratis</div>
-        <div class="trust-bar__text">Kaciga, naočale, rukavice — sve u cijeni</div>
+        <div class="trust-bar__title">Sve uključeno</div>
+        <div class="trust-bar__text">Kaciga, naočale, rukavice, gorivo, obuka</div>
       </div>
       <div class="trust-bar__item">
-        <div class="trust-bar__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <div class="trust-bar__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
         <div class="trust-bar__title">Za obitelji</div>
-        <div class="trust-bar__text">Jedini u ZG s dječjim quadovima</div>
+        <div class="trust-bar__text">Dječji quadovi od 6 godina, 30km staza</div>
       </div>
       <div class="trust-bar__item">
         <div class="trust-bar__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-        <div class="trust-bar__title">15+ ruta</div>
-        <div class="trust-bar__text">20 min od centra, drugi svijet</div>
+        <div class="trust-bar__title">20 min od centra</div>
+        <div class="trust-bar__text">Veliko Polje, 10010 Zagreb — lako dostupno</div>
       </div>
       <div class="trust-bar__item">
         <div class="trust-bar__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-        <div class="trust-bar__title">Za početnike</div>
-        <div class="trust-bar__text">Automatik, obuka, bez iskustva</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- FEATURED VEHICLE -->
-<section class="featured reveal" id="vehicle">
-  <div class="container">
-    <div class="featured__card">
-      <div class="featured__img ph" style="min-height:300px"><span>Foto — Linhai Landforce 550L, bočno na terenu</span></div>
-      <div class="featured__body">
-        <div class="featured__overline">Quad</div>
-        <h2 class="featured__title">Linhai Landforce 550L</h2>
-        <p class="featured__desc">Potpuno novi quad s automatskim mjenjačem. Sjedneš i voziš — bez iskustva, bez brige. Stabilan na svakom terenu. Sva naša vozila se redovito servisiraju i provjeravaju prije svake vožnje.</p>
-        <div class="featured__specs">
-          <span class="chip">550cc</span>
-          <span class="chip">4×4</span>
-          <span class="chip">EFI</span>
-          <span class="chip">CVT automatik</span>
-          <span class="chip chip--accent">Potpuno nov</span>
-        </div>
-        <button class="btn btn--accent" style="align-self:flex-start;" onclick="openBooking('adult','half')">Rezerviraj quad →</button>
+        <div class="trust-bar__title">16 god iskustva</div>
+        <div class="trust-bar__text">Profesionalni tim iz auto-industrije</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- KIDS -->
-<section class="kids reveal" id="kids">
-  <div class="container">
-    <div class="kids__card">
-      <div style="position:relative">
-        <div class="kids__badge">Jedini u Zagrebu</div>
-        <div class="kids__img ph" style="background:#18180f"><span>Foto — dijete na malom quadu, obitelj iza</span></div>
-      </div>
-      <div class="kids__body">
-        <h2 class="kids__title">Dovedi i klince.</h2>
-        <p class="kids__sub">90cc quad za djecu od 9 godina. Mama i tata na velikima, klinci na svojima. Nitko u Zagrebu nema ovo.</p>
-        <div class="kids__info-grid">
-          <div class="kids__info-item"><div class="kids__info-val">90cc</div><div class="kids__info-label">Motor</div></div>
-          <div class="kids__info-item"><div class="kids__info-val">9+</div><div class="kids__info-label">Min. dob</div></div>
-          <div class="kids__info-item"><div class="kids__info-val">Gratis</div><div class="kids__info-label">Oprema</div></div>
-          <div class="kids__info-item"><div class="kids__info-val">Sigurno</div><div class="kids__info-label">Ogranič. brzina</div></div>
-        </div>
-        <div class="kids__prices">
-          <div class="kids__price"><div class="kids__price-val">€60</div><div class="kids__price-label">Pola dana / 6h</div></div>
-          <div class="kids__price"><div class="kids__price-val">€120</div><div class="kids__price-label">Cijeli dan / 12h</div></div>
-        </div>
-        <button class="btn btn--outline" style="align-self:flex-start;" onclick="openBooking('kids','half')">Rezerviraj obiteljsku vožnju →</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section class="pricing reveal" id="pricing">
+<!-- ═══ FLEET PREVIEW ═══ -->
+<section class="page-section reveal">
   <div class="container">
     <div class="section-header">
-      <div><h2 class="section-title">Cijene</h2><p class="section-sub" style="margin-top:.3rem">Sve uključeno — quad, oprema, obuka, staze</p></div>
-    </div>
-    <div class="pricing__grid">
-      <div class="pricing__card">
-        <div class="pricing__card-type">Pola dana</div>
-        <div class="pricing__card-price">€80 <small>/ 6h</small></div>
-        <div class="pricing__card-duration">Linhai Landforce 550L</div>
-        <ul class="pricing__card-features">
-          <li>Kompletna sigurnosna oprema</li>
-          <li>Obuka prije vožnje</li>
-          <li>Pristup šumskim stazama</li>
-          <li>Idealno za prvi put</li>
-        </ul>
-        <button class="btn btn--ghost" style="width:100%" onclick="openBooking('adult','half')">Rezerviraj →</button>
+      <div>
+        <div class="section-overline">Flota</div>
+        <h2 class="section-title mt-1">10 quadova. 4 modela. Potpuno novi.</h2>
+        <p class="section-desc">Zaboravite na istrošena vozila. Svaki quad je opremljen koferima, nosačem mobitela, USB-C punjačem, prvom pomoći i aparatom za gašenje.</p>
       </div>
-      <div class="pricing__card pricing__card--pop">
-        <div class="pricing__card-badge">Najpopularnije</div>
-        <div class="pricing__card-type">Cijeli dan</div>
-        <div class="pricing__card-price">€150 <small>/ 12h</small></div>
-        <div class="pricing__card-duration">Linhai Landforce 550L</div>
-        <ul class="pricing__card-features">
-          <li>Kompletna sigurnosna oprema</li>
-          <li>Proširena obuka</li>
-          <li>Pristup svim rutama</li>
-          <li>Najbolja opcija za ekipu</li>
+      <a href="quad.html" class="btn btn--ghost btn--sm">Svi modeli →</a>
+    </div>
+    <div class="fleet-grid">
+
+      <!-- Segway AT5L -->
+      <div class="fleet-card">
+        <div class="fleet-card__img ph"><span>Foto — Segway AT5L narančasti</span></div>
+        <div class="fleet-card__body">
+          <div class="fleet-card__count">4 vozila</div>
+          <div class="fleet-card__name">Segway AT5L</div>
+          <div class="fleet-card__desc">Agilnost i moderna tehnologija. Premium osjećaj i vrhunska kontrola na zahtjevnim stazama.</div>
+          <div class="fleet-card__specs">
+            <span class="chip">Automatik</span>
+            <span class="chip">4×4</span>
+            <span class="chip">Koferi</span>
+          </div>
+          <div class="fleet-card__price">
+            <span class="fleet-card__price-val">€100</span>
+            <span class="fleet-card__price-label">/ pola dana</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Linhai 550L -->
+      <div class="fleet-card">
+        <div class="fleet-card__img ph" style="background:#1a1816"><span>Foto — Linhai 550L crni</span></div>
+        <div class="fleet-card__body">
+          <div class="fleet-card__count">2 vozila</div>
+          <div class="fleet-card__name">Linhai 550L</div>
+          <div class="fleet-card__desc">Pouzdani i robusni. Savršeni za prvi put i za iskusne vozače koji cijene stabilnost na dugim rutama.</div>
+          <div class="fleet-card__specs">
+            <span class="chip">550cc</span>
+            <span class="chip">4×4</span>
+            <span class="chip">EFI</span>
+          </div>
+          <div class="fleet-card__price">
+            <span class="fleet-card__price-val">€100</span>
+            <span class="fleet-card__price-label">/ pola dana</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Linhai 650 -->
+      <div class="fleet-card">
+        <div class="fleet-card__img ph" style="background:#181a16"><span>Foto — Linhai 650 maskirni</span></div>
+        <div class="fleet-card__body">
+          <div class="fleet-card__count">2 vozila</div>
+          <div class="fleet-card__name">Linhai 650 Landforce</div>
+          <div class="fleet-card__desc">Pravi terenski ratnici. Maskirni dizajn, dodatna snaga, stvoreni za blato, strme uspone i stapanje s prirodom.</div>
+          <div class="fleet-card__specs">
+            <span class="chip">650cc</span>
+            <span class="chip">4×4</span>
+            <span class="chip chip--accent">Off-road</span>
+          </div>
+          <div class="fleet-card__price">
+            <span class="fleet-card__price-val">€100</span>
+            <span class="fleet-card__price-label">/ pola dana</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Linhai 1000 -->
+      <div class="fleet-card" style="border-color:rgba(245,166,35,0.2)">
+        <div class="fleet-card__img ph" style="background:#1c1810"><span>Foto — Linhai 1000</span></div>
+        <div class="fleet-card__body">
+          <div class="fleet-card__count">2 vozila · <span style="color:var(--accent);font-weight:600">Kraljevi terena</span></div>
+          <div class="fleet-card__name">Linhai 1000</div>
+          <div class="fleet-card__desc">Brutalna snaga za one koji ne pristaju na kompromise. Maksimalni adrenalin i performanse koje lome sve prepreke.</div>
+          <div class="fleet-card__specs">
+            <span class="chip">1000cc</span>
+            <span class="chip">4×4</span>
+            <span class="chip chip--accent">Max snaga</span>
+          </div>
+          <div class="fleet-card__price">
+            <span class="fleet-card__price-val">€80</span>
+            <span class="fleet-card__price-label">/ pola dana</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div style="text-align:center;margin-top:1.5rem">
+      <a href="quad.html" class="btn btn--outline">Pogledaj sve detalje flote →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ KIDS TEASER ═══ -->
+<section class="page-section page-section--border reveal">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr;gap:1.5rem;align-items:center" class="kids-teaser-grid">
+      <div class="ph" style="border-radius:var(--r-xl);overflow:hidden;min-height:280px;aspect-ratio:16/10;border:1px solid rgba(245,166,35,0.12)"><span>Foto — djeca na malim quadovima, obitelj iza</span></div>
+      <div>
+        <span class="chip chip--accent mb-2">Jedini u Zagrebu</span>
+        <h2 class="section-title mt-2">Dovedi i klince.</h2>
+        <p class="section-desc">Dječji quadovi za djecu od 6 godina. 30km prikladnih staza u neposrednoj blizini. Mama i tata na velikim quadovima, djeca na svojima. Uz obavezan nadzor roditelja i našu obuku.</p>
+        <div style="display:flex;gap:0.8rem;flex-wrap:wrap;margin-top:1rem">
+          <span class="chip">6+ godina</span>
+          <span class="chip">Obuka uključena</span>
+          <span class="chip">Oprema gratis</span>
+          <span class="chip">od €60 / pola dana</span>
+        </div>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:1.2rem">
+          <a href="obitelj.html" class="btn btn--outline btn--sm">Saznaj više →</a>
+          <button class="btn btn--accent btn--sm" onclick="openBooking('kids','half')">Rezerviraj dječji quad</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRICING PREVIEW ═══ -->
+<section class="page-section reveal">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-overline">Cijene</div>
+        <h2 class="section-title mt-1">Bez skrivenih troškova</h2>
+        <p class="section-desc">Gorivo, oprema, obuka, pristup stazama — sve uključeno. Samo čista zabava.</p>
+      </div>
+      <a href="cijene.html" class="btn btn--ghost btn--sm">Svi detalji →</a>
+    </div>
+    <div class="pricing-grid">
+
+      <div class="pricing-card">
+        <div class="pricing-card__type">Pola dana</div>
+        <div class="pricing-card__price">€100 <small>/ 6h</small></div>
+        <div class="pricing-card__duration">Svi modeli osim Linhai 1000</div>
+        <ul class="pricing-card__features">
+          <li>Gorivo, oprema, obuka</li>
+          <li>Do 100 km uključeno</li>
+          <li>Savršeno za prvi put</li>
+        </ul>
+        <button class="btn btn--ghost btn--block" onclick="openBooking('standard','half')">Rezerviraj →</button>
+      </div>
+
+      <div class="pricing-card pricing-card--pop">
+        <div class="pricing-card__badge">Najpopularnije</div>
+        <div class="pricing-card__type">Cijeli dan</div>
+        <div class="pricing-card__price">€150 <small>/ 12h</small></div>
+        <div class="pricing-card__duration">Svi modeli osim Linhai 1000</div>
+        <ul class="pricing-card__features">
+          <li>Gorivo, oprema, obuka</li>
+          <li>Do 100 km uključeno</li>
           <li>Maksimalno vrijeme na stazi</li>
         </ul>
-        <button class="btn btn--accent" style="width:100%" onclick="openBooking('adult','full')">Rezerviraj →</button>
+        <button class="btn btn--accent btn--block" onclick="openBooking('standard','full')">Rezerviraj →</button>
       </div>
-      <div class="pricing__card">
-        <div class="pricing__card-badge" style="background:var(--success)">Dječji quad</div>
-        <div class="pricing__card-type">Djeca od 9+</div>
-        <div class="pricing__card-price">€60 <small>/ 6h</small></div>
-        <div class="pricing__card-duration">Quad 90cc · Cijeli dan €120</div>
-        <ul class="pricing__card-features">
-          <li>90cc quad prilagođen djeci</li>
-          <li>Ograničena brzina</li>
-          <li>Dječja kaciga i oprema</li>
-          <li>Voze uz roditelje</li>
-          <li>Jedini u Zagrebu</li>
+
+      <div class="pricing-card">
+        <div class="pricing-card__badge" style="background:var(--success)">Dječji quad</div>
+        <div class="pricing-card__type">Djeca od 6+</div>
+        <div class="pricing-card__price">€60 <small>/ 6h</small></div>
+        <div class="pricing-card__duration">Cijeli dan: €120</div>
+        <ul class="pricing-card__features">
+          <li>Dječja oprema uključena</li>
+          <li>Obuka i nadzor</li>
+          <li>30km prikladnih staza</li>
         </ul>
-        <button class="btn btn--ghost" style="width:100%" onclick="openBooking('kids','half')">Rezerviraj →</button>
+        <button class="btn btn--ghost btn--block" onclick="openBooking('kids','half')">Rezerviraj →</button>
       </div>
+
     </div>
+    <p style="text-align:center;margin-top:1rem;font-size:0.6rem;color:var(--text-3)">Linhai 1000: €80 / pola dana · €150 / cijeli dan · Ograničenje 100 km, svaki dodatni km = €1 · Depozit €200 (vraća se u cijelosti) · <a href="cijene.html" style="color:var(--accent)">Svi detalji →</a></p>
   </div>
 </section>
 
-<!-- ROUTES -->
-<section class="routes reveal" id="routes">
+<!-- ═══ ROUTES TEASER ═══ -->
+<section class="page-section page-section--border reveal">
   <div class="container">
-    <div class="section-header"><h2 class="section-title">Rute</h2></div>
-
-    <!-- Route options info -->
-    <div style="display:grid;grid-template-columns:1fr;gap:0.6rem;margin-bottom:1.5rem" class="routes__options">
-      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:1rem;display:flex;gap:0.8rem;align-items:flex-start">
-        <div style="width:36px;height:36px;min-width:36px;border-radius:var(--radius-md);background:var(--accent-glow);display:flex;align-items:center;justify-content:center;color:var(--accent)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:18px;height:18px"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-        </div>
-        <div>
-          <div style="font-family:var(--font-display);font-weight:600;font-size:0.82rem;margin-bottom:0.15rem">Vođena tura</div>
-          <div style="font-size:0.62rem;color:var(--text-muted);line-height:1.6">Naš vodič vas vodi cijelom rutom. Idealno za početnike i obitelji. Sve objašnjeno, bez stresa.</div>
-        </div>
+    <div class="section-header">
+      <div>
+        <div class="section-overline">Rute</div>
+        <h2 class="section-title mt-1">Od betona do blata</h2>
+        <p class="section-desc">Ne znate kamo voziti? Lokacija nam je savršena polazišna točka. Vođena tura ili samostalno istraživanje s GPS-om.</p>
       </div>
-      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:1rem;display:flex;gap:0.8rem;align-items:flex-start">
-        <div style="width:36px;height:36px;min-width:36px;border-radius:var(--radius-md);background:var(--accent-glow);display:flex;align-items:center;justify-content:center;color:var(--accent)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:18px;height:18px"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><path d="M8 2v16"/><path d="M16 6v16"/></svg>
-        </div>
-        <div>
-          <div style="font-family:var(--font-display);font-weight:600;font-size:0.82rem;margin-bottom:0.15rem">Samostalno istraživanje</div>
-          <div style="font-size:0.62rem;color:var(--text-muted);line-height:1.6">Dobivate GPS uređaj ili kartu s predloženim rutama prilagođenima quadovima. Vaš tempo, vaša avantura.</div>
-        </div>
-      </div>
+      <a href="rute.html" class="btn btn--ghost btn--sm">Sve rute →</a>
     </div>
-    <div class="routes__layout">
-      <div class="routes__map">
-        <div class="routes__map-big">15+</div>
-        <span>Interaktivna karta ruta — placeholder</span>
+    <div class="grid-3">
+      <div class="info-card">
+        <div class="info-card__icon">🌲</div>
+        <div>
+          <div class="info-card__title">Šumske staze</div>
+          <div class="info-card__text">Krenite direktno iz naše baze i uronite u mrežu neasfaltiranih puteva.</div>
+        </div>
       </div>
-      <div class="routes__list">
-        <div class="route-row"><div class="route-row__left"><div class="route-row__name">Šumska lagana</div><div class="route-row__meta">~2h · 15km</div></div><div class="route-row__diff"><i class="f"></i><i></i><i></i></div></div>
-        <div class="route-row"><div class="route-row__left"><div class="route-row__name">Panoramska</div><div class="route-row__meta">~3h · 20km</div></div><div class="route-row__diff"><i class="f"></i><i class="f"></i><i></i></div></div>
-        <div class="route-row"><div class="route-row__left"><div class="route-row__name">Brdski off-road</div><div class="route-row__meta">~3h · 25km</div></div><div class="route-row__diff"><i class="f"></i><i class="f"></i><i></i></div></div>
-        <div class="route-row"><div class="route-row__left"><div class="route-row__name">Blato i teren</div><div class="route-row__meta">~4h · 30km</div></div><div class="route-row__diff"><i class="f"></i><i class="f"></i><i class="f"></i></div></div>
-        <div class="route-row"><div class="route-row__left"><div class="route-row__name">Obiteljska</div><div class="route-row__meta">~1.5h · 10km</div></div><div class="route-row__diff"><i class="f"></i><i></i><i></i></div></div>
-        <div class="route-row"><div class="route-row__left"><div class="route-row__name">Zahtjevni trail</div><div class="route-row__meta">~5h · 35km</div></div><div class="route-row__diff"><i class="f"></i><i class="f"></i><i class="f"></i></div></div>
-        <p style="margin-top:.8rem;font-size:.58rem;color:var(--text-muted)">Biramo rutu prema iskustvu. Sve kreće od naše lokacije.</p>
+      <div class="info-card">
+        <div class="info-card__icon">👨‍👩‍👧</div>
+        <div>
+          <div class="info-card__title">Obiteljska ruta</div>
+          <div class="info-card__text">Široki makadami i blagi usponi s prekrasnim pogledima. Savršeno za dvoje ili obitelj.</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card__icon">💪</div>
+        <div>
+          <div class="info-card__title">Adrenalinski izazov</div>
+          <div class="info-card__text">Više blata, vode i prirodnih prepreka. Za one koji traže jači tempo.</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- GALLERY -->
-<section class="gallery reveal" id="gallery">
-  <div class="container">
-    <div class="section-header"><h2 class="section-title">Galerija</h2></div>
-    <div class="gallery__grid">
-      <div class="gallery__item gallery__item--tall ph"><span>Vozač u šumi</span></div>
-      <div class="gallery__item ph" style="background:#222018"><span>Blato close-up</span></div>
-      <div class="gallery__item ph" style="background:#1a1a16"><span>Oprema</span></div>
-      <div class="gallery__item ph" style="background:#1e1e1a"><span>Dječji quad</span></div>
-      <div class="gallery__item gallery__item--wide ph" style="background:#16160f"><span>Panorama — staza kroz brda</span></div>
-      <div class="gallery__item ph"><span>Obitelj</span></div>
-      <div class="gallery__item ph" style="background:#1c1810"><span>Zalazak</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ ŠTO JE UKLJUČENO / TROŠKOVI ═══ -->
-<section class="reveal" style="padding:4rem 0">
-  <div class="container">
-    <div class="section-header"><h2 class="section-title">Što je uključeno u cijenu</h2></div>
-    <div style="display:grid;grid-template-columns:1fr;gap:0.8rem">
-
-      <!-- Uključeno -->
-      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.2rem">
-        <div style="font-family:var(--font-display);font-weight:700;font-size:0.88rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:0.4rem">
-          <span style="color:var(--success)">✓</span> Uključeno u cijenu
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem">
-          <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.68rem;color:var(--text-secondary)"><span style="color:var(--success);font-size:0.55rem">●</span> Quad</div>
-          <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.68rem;color:var(--text-secondary)"><span style="color:var(--success);font-size:0.55rem">●</span> Kaciga</div>
-          <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.68rem;color:var(--text-secondary)"><span style="color:var(--success);font-size:0.55rem">●</span> Zaštitne naočale</div>
-          <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.68rem;color:var(--text-secondary)"><span style="color:var(--success);font-size:0.55rem">●</span> Rukavice</div>
-          <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.68rem;color:var(--text-secondary)"><span style="color:var(--success);font-size:0.55rem">●</span> Obuka prije vožnje</div>
-          <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.68rem;color:var(--text-secondary)"><span style="color:var(--success);font-size:0.55rem">●</span> Pristup stazama</div>
-          <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.68rem;color:var(--text-secondary)"><span style="color:var(--success);font-size:0.55rem">●</span> Besplatan parking</div>
-          <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.68rem;color:var(--text-secondary)"><span style="color:var(--success);font-size:0.55rem">●</span> GPS / karta ruta</div>
-        </div>
-      </div>
-
-      <!-- Dodatni troškovi / TBD -->
-      <div style="background:var(--bg-card);border:1px solid rgba(245,166,35,0.15);border-radius:var(--radius-lg);padding:1.2rem">
-        <div style="font-family:var(--font-display);font-weight:700;font-size:0.88rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:0.4rem">
-          <span style="color:var(--accent)">ℹ</span> Dobro je znati
-        </div>
-        <div style="display:flex;flex-direction:column;gap:0.6rem">
-          <div style="display:flex;gap:0.6rem;align-items:flex-start">
-            <span style="font-size:0.72rem;min-width:20px">⛽</span>
-            <div><div style="font-size:0.72rem;font-weight:600;color:var(--text-primary);margin-bottom:0.1rem">Gorivo</div><div style="font-size:0.6rem;color:var(--text-muted);line-height:1.55;padding:0.3rem 0.5rem;background:rgba(245,166,35,0.06);border-radius:var(--radius-sm);border:1px dashed rgba(245,166,35,0.15)">⚠ je li gorivo uključeno u cijenu ili se quad vraća s punim tankom?</div></div>
-          </div>
-          <div style="display:flex;gap:0.6rem;align-items:flex-start">
-            <span style="font-size:0.72rem;min-width:20px">💳</span>
-            <div><div style="font-size:0.72rem;font-weight:600;color:var(--text-primary);margin-bottom:0.1rem">Depozit / polog</div><div style="font-size:0.6rem;color:var(--text-muted);line-height:1.55;padding:0.3rem 0.5rem;background:rgba(245,166,35,0.06);border-radius:var(--radius-sm);border:1px dashed rgba(245,166,35,0.15)">⚠ koliki je depozit? Plaća li se gotovinom ili karticom? Vraća li se u cijelosti?</div></div>
-          </div>
-          <div style="display:flex;gap:0.6rem;align-items:flex-start">
-            <span style="font-size:0.72rem;min-width:20px">👕</span>
-            <div><div style="font-size:0.72rem;font-weight:600;color:var(--text-primary);margin-bottom:0.1rem">Što ponijeti</div><div style="font-size:0.6rem;color:var(--text-secondary);line-height:1.55">Duge hlače, zatvorene cipele i odjeća koja se smije zaprljati. Sve ostalo dobivate od nas.</div></div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══ PRAVILA ZA VOZAČE ═══ -->
-<section class="reveal" style="padding:0 0 4rem">
-  <div class="container">
-    <div class="section-header"><h2 class="section-title">Pravila i uvjeti vožnje</h2></div>
-    <div style="display:grid;grid-template-columns:1fr;gap:0.6rem">
-
-      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:1rem;display:flex;gap:0.8rem;align-items:flex-start">
-        <div style="width:36px;height:36px;min-width:36px;border-radius:var(--radius-md);background:var(--accent-glow);display:flex;align-items:center;justify-content:center;font-size:0.9rem">🪪</div>
-        <div>
-          <div style="font-family:var(--font-display);font-weight:600;font-size:0.82rem;margin-bottom:0.15rem">Vozačka dozvola</div>
-          <div style="font-size:0.62rem;color:var(--text-secondary);line-height:1.6">Za odrasle quadove potrebna je vozačka dozvola B kategorije. Fizički dokument morate imati sa sobom prilikom vožnje.</div>
-        </div>
-      </div>
-
-      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:1rem;display:flex;gap:0.8rem;align-items:flex-start">
-        <div style="width:36px;height:36px;min-width:36px;border-radius:var(--radius-md);background:var(--accent-glow);display:flex;align-items:center;justify-content:center;font-size:0.9rem">👶</div>
-        <div>
-          <div style="font-family:var(--font-display);font-weight:600;font-size:0.82rem;margin-bottom:0.15rem">Djeca na dječjim quadovima</div>
-          <div style="font-size:0.62rem;color:var(--text-secondary);line-height:1.6">Dječji quadovi 90cc su za djecu od 9 godina na dalje. Voze na poljskim putevima i makadamu uz nadzor roditelja. Nisu namijenjeni za cestu ili šumske staze.</div>
-        </div>
-      </div>
-
-      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:1rem;display:flex;gap:0.8rem;align-items:flex-start">
-        <div style="width:36px;height:36px;min-width:36px;border-radius:var(--radius-md);background:var(--accent-glow);display:flex;align-items:center;justify-content:center;font-size:0.9rem">🛡</div>
-        <div>
-          <div style="font-family:var(--font-display);font-weight:600;font-size:0.82rem;margin-bottom:0.15rem">Obuka za početnike</div>
-          <div style="font-size:0.62rem;color:var(--text-secondary);line-height:1.6">Prije polaska prolazimo kratku obuku na ravnom terenu dok ne savladate sve kontrole. Automatski mjenjač — nema šaltanja, samo gas i kočnica.</div>
-        </div>
-      </div>
-
-      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:1rem;display:flex;gap:0.8rem;align-items:flex-start">
-        <div style="width:36px;height:36px;min-width:36px;border-radius:var(--radius-md);background:var(--accent-glow);display:flex;align-items:center;justify-content:center;font-size:0.9rem">🏍</div>
-        <div>
-          <div style="font-family:var(--font-display);font-weight:600;font-size:0.82rem;margin-bottom:0.15rem">Suvozači</div>
-          <div style="font-size:0.6rem;color:var(--text-muted);line-height:1.55;padding:0.3rem 0.5rem;background:rgba(245,166,35,0.06);border-radius:var(--radius-sm);border:1px dashed rgba(245,166,35,0.15)">⚠ smije li vozač imati suvozača? Od koliko godina? Koja su pravila za suvozače?</div>
-        </div>
-      </div>
-
-      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:1rem;display:flex;gap:0.8rem;align-items:flex-start">
-        <div style="width:36px;height:36px;min-width:36px;border-radius:var(--radius-md);background:var(--accent-glow);display:flex;align-items:center;justify-content:center;font-size:0.9rem">🔧</div>
-        <div>
-          <div style="font-family:var(--font-display);font-weight:600;font-size:0.82rem;margin-bottom:0.15rem">Sigurnost vozila</div>
-          <div style="font-size:0.62rem;color:var(--text-secondary);line-height:1.6">Sva naša vozila se redovito servisiraju i provjeravaju prije svake vožnje. Potpuno nova flota — bez starih, istrošenih strojeva.</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══ RECENZIJE / SOCIAL PROOF ═══ -->
-<section class="reveal" style="padding:0 0 4rem">
+<!-- ═══ REVIEWS ═══ -->
+<section class="page-section reveal">
   <div class="container">
     <div class="section-header">
       <h2 class="section-title">Što kažu naši gosti</h2>
       <span class="section-sub" style="display:flex;align-items:center;gap:0.3rem">
-        <span style="color:var(--accent)">★★★★★</span>
-        <span>Google Reviews</span>
+        <span style="color:var(--accent)">★★★★★</span> Google Reviews
       </span>
     </div>
-    <div style="display:grid;grid-template-columns:1fr;gap:0.8rem" id="reviews-grid">
-
-      <!-- Review 1 — placeholder -->
-      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.2rem">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem">
-          <div style="display:flex;align-items:center;gap:0.5rem">
-            <div style="width:32px;height:32px;border-radius:50%;background:var(--accent-glow);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:0.7rem;color:var(--accent)">M</div>
-            <div><div style="font-size:0.72rem;font-weight:600">Marko T.</div><div style="font-size:0.48rem;color:var(--text-dim)">Google Review</div></div>
-          </div>
-          <div style="color:var(--accent);font-size:0.6rem">★★★★★</div>
+    <div class="grid-3">
+      <div class="review-card">
+        <div class="review-card__head">
+          <div class="review-card__author"><div class="review-card__avatar">M</div><div><div class="review-card__name">Marko T.</div><div class="review-card__src">Google Review</div></div></div>
+          <div class="review-card__stars">★★★★★</div>
         </div>
-        <p style="font-size:0.68rem;color:var(--text-secondary);line-height:1.65;font-style:italic;padding:0.3rem 0.6rem;background:rgba(245,166,35,0.04);border-radius:var(--radius-sm);border:1px dashed rgba(245,166,35,0.1)">⚠ ovdje ide stvarna recenzija s Googlea. Kad budu, zamijenimo placeholder tekstom gosta.</p>
+        <p class="review-card__text tbd">⚠ Ovdje ide stvarna recenzija s Googlea.</p>
       </div>
-
-      <!-- Review 2 — placeholder -->
-      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.2rem">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem">
-          <div style="display:flex;align-items:center;gap:0.5rem">
-            <div style="width:32px;height:32px;border-radius:50%;background:var(--accent-glow);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:0.7rem;color:var(--accent)">A</div>
-            <div><div style="font-size:0.72rem;font-weight:600">Ana K.</div><div style="font-size:0.48rem;color:var(--text-dim)">Google Review</div></div>
-          </div>
-          <div style="color:var(--accent);font-size:0.6rem">★★★★★</div>
+      <div class="review-card">
+        <div class="review-card__head">
+          <div class="review-card__author"><div class="review-card__avatar">A</div><div><div class="review-card__name">Ana K.</div><div class="review-card__src">Google Review</div></div></div>
+          <div class="review-card__stars">★★★★★</div>
         </div>
-        <p style="font-size:0.68rem;color:var(--text-secondary);line-height:1.65;font-style:italic;padding:0.3rem 0.6rem;background:rgba(245,166,35,0.04);border-radius:var(--radius-sm);border:1px dashed rgba(245,166,35,0.1)">⚠ druga recenzija s Googlea ili TripAdvisora. Blatnjavi, nasmijani i sretni ljudi prodaju priču.</p>
+        <p class="review-card__text tbd">⚠ Druga recenzija — idealno od obitelji ili ekipe.</p>
       </div>
-
-      <!-- Review 3 — placeholder -->
-      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.2rem">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem">
-          <div style="display:flex;align-items:center;gap:0.5rem">
-            <div style="width:32px;height:32px;border-radius:50%;background:var(--accent-glow);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:0.7rem;color:var(--accent)">I</div>
-            <div><div style="font-size:0.72rem;font-weight:600">Ivan P.</div><div style="font-size:0.48rem;color:var(--text-dim)">TripAdvisor</div></div>
-          </div>
-          <div style="color:var(--accent);font-size:0.6rem">★★★★★</div>
+      <div class="review-card">
+        <div class="review-card__head">
+          <div class="review-card__author"><div class="review-card__avatar">I</div><div><div class="review-card__name">Ivan P.</div><div class="review-card__src">TripAdvisor</div></div></div>
+          <div class="review-card__stars">★★★★★</div>
         </div>
-        <p style="font-size:0.68rem;color:var(--text-secondary);line-height:1.65;font-style:italic;padding:0.3rem 0.6rem;background:rgba(245,166,35,0.04);border-radius:var(--radius-sm);border:1px dashed rgba(245,166,35,0.1)">⚠ treća recenzija — idealno od obitelji s djecom, da pokažemo i taj aspekt.</p>
+        <p class="review-card__text tbd">⚠ Treća recenzija — blatnjavi, nasmijani i sretni ljudi prodaju priču.</p>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- FAQ -->
-<section class="faq reveal" id="faq">
+<!-- ═══ CTA BANNER ═══ -->
+<section class="page-section reveal">
   <div class="container">
-    <div class="section-header"><h2 class="section-title">Često postavljana pitanja</h2></div>
-    <div class="faq__list">
-      <div class="faq__item"><button class="faq__q" onclick="togFaq(this)"><span>Trebam li iskustvo vožnje quada?</span><div class="faq__toggle">+</div></button><div class="faq__a"><p>Ne. Svi naši quadovi imaju automatski mjenjač — nema šaltanja. Prije polaska prolazimo kratku obuku na ravnom terenu dok ne savladate gas, kočnicu i upravljanje. Za 5 minuta ste spremni.</p></div></div>
-      <div class="faq__item"><button class="faq__q" onclick="togFaq(this)"><span>Što je uključeno u cijenu?</span><div class="faq__toggle">+</div></button><div class="faq__a"><p>Quad, kaciga, zaštitne naočale, rukavice, obuka, pristup stazama, GPS/karta ruta i besplatan parking. Sve je uključeno, nema skrivenih troškova za opremu.</p></div></div>
-      <div class="faq__item"><button class="faq__q" onclick="togFaq(this)"><span>Trebam li vozačku dozvolu?</span><div class="faq__toggle">+</div></button><div class="faq__a"><p>Da, za odrasle quadove (550cc) potrebna je vozačka dozvola B kategorije. Fizički dokument morate imati sa sobom. Za dječje quadove (90cc) dozvola nije potrebna.</p></div></div>
-      <div class="faq__item"><button class="faq__q" onclick="togFaq(this)"><span>Koliko godina moraju imati djeca?</span><div class="faq__toggle">+</div></button><div class="faq__a"><p>Minimalna dob za dječje quadove 90cc je 9 godina. Djeca voze na poljskim putevima i makadamu uz nadzor roditelja. Oprema za dijete je uključena u cijenu.</p></div></div>
-      <div class="faq__item"><button class="faq__q" onclick="togFaq(this)"><span>Nudite li vođene ture ili samostalnu vožnju?</span><div class="faq__toggle">+</div></button><div class="faq__a"><p>Oboje. Možete voziti s našim vodičem koji vas vodi cijelom rutom, ili uzeti quad i samostalno istraživati uz GPS uređaj ili kartu s predloženim rutama.</p></div></div>
-      <div class="faq__item"><button class="faq__q" onclick="togFaq(this)"><span>Kako rezerviram?</span><div class="faq__toggle">+</div></button><div class="faq__a"><p>Kliknite "Rezerviraj" bilo gdje na stranici, odaberite quad, trajanje, datum i broj vozača. Poruka se automatski šalje na naš WhatsApp. Potvrda u minutama.</p></div></div>
-      <div class="faq__item"><button class="faq__q" onclick="togFaq(this)"><span>Što ako je kiša?</span><div class="faq__toggle">+</div></button><div class="faq__a"><p>Blato je dio zabave! Vozimo po većini vremenskih uvjeta. Ako je vrijeme stvarno opasno, prebacit ćemo vaš termin besplatno.</p></div></div>
-      <div class="faq__item"><button class="faq__q" onclick="togFaq(this)"><span>Dolazimo kao grupa — može?</span><div class="faq__toggle">+</div></button><div class="faq__a"><p>Naravno. Parovi, ekipe, momačke, team-building — javite nam koliko vas dolazi i dogovorimo najbolju rutu.</p></div></div>
-      <div class="faq__item"><button class="faq__q" onclick="togFaq(this)"><span>Gdje se točno nalazite?</span><div class="faq__toggle">+</div></button><div class="faq__a"><p>Velikopoljska 22A, Veliko Polje, Novi Zagreb — oko 20 minuta autom od centra. Lako dostupno autom, taksijem ili Uberom. Besplatan i siguran parking za vaš auto dok ste na vožnji.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA BANNER + MAP -->
-<section class="cta-banner reveal" id="contact">
-  <div class="container">
-    <div class="cta-banner__card" style="text-align:left;align-items:stretch">
-      <div style="display:grid;grid-template-columns:1fr;gap:1.5rem">
-        <div style="display:flex;flex-direction:column;gap:1rem;justify-content:center;align-items:flex-start;position:relative">
-          <h2 class="cta-banner__title" style="text-align:left">Spreman za avanturu?</h2>
-          <p class="cta-banner__sub" style="text-align:left">Pošalji WhatsApp poruku s datumom i brojem vozača. Potvrđujemo u minutama.</p>
-          <div class="cta-banner__phone">+385 95 544 2541</div>
-          <div style="display:flex;gap:.5rem;flex-wrap:wrap">
-            <button class="btn btn--accent" onclick="openBooking()">Rezerviraj vožnju →</button>
-            <a href="https://wa.me/385955442541" target="_blank" rel="noopener" class="btn btn--ghost">WhatsApp →</a>
-          </div>
-          <div style="font-size:.6rem;color:var(--text-muted);line-height:1.6;position:relative">
-            <strong style="color:var(--text-secondary)">Velikopoljska 22A</strong><br>
-            Veliko Polje, Novi Zagreb<br>
-            Po dogovoru, 7 dana u tjednu<br>
-            Besplatan i siguran parking
-          </div>
+    <div class="cta-banner" style="display:grid;grid-template-columns:1fr;gap:1.5rem" id="cta-grid">
+      <div style="display:flex;flex-direction:column;gap:1rem;position:relative">
+        <h2 class="cta-banner__title">Spreman za avanturu?</h2>
+        <p class="cta-banner__sub">Zgrabite ključeve i oslobodite zvijer. Rezervacija putem WhatsAppa — potvrđujemo u minutama.</p>
+        <div class="cta-banner__phone">+385 95 544 2541</div>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+          <button class="btn btn--accent" onclick="openBooking()">Rezerviraj vožnju →</button>
+          <a href="kontakt.html" class="btn btn--ghost">Kontakt i lokacija</a>
         </div>
-        <div style="border-radius:var(--radius-md);overflow:hidden;min-height:220px;border:1px solid var(--border)">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2784.5!2d15.9694!3d45.7494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDXCsDQ0JzU3LjgiTiAxNcKwNTgnMDkuOCJF!5e0!3m2!1shr!2shr!4v1" width="100%" height="100%" style="border:0;min-height:220px;display:block;filter:saturate(0.3) brightness(0.8)" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div style="font-size:0.6rem;color:var(--text-3);line-height:1.6;position:relative">
+          <strong style="color:var(--text-2)">Velikopoljska 22A</strong><br>
+          Veliko Polje, 10010 Zagreb<br>
+          Pon-Ned 07:00 – 22:00<br>
+          Besplatan i siguran parking
         </div>
+      </div>
+      <div style="border-radius:var(--r-md);overflow:hidden;min-height:220px;border:1px solid var(--border)">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5568.963136108243!2d16.012577275775804!3d45.74149081489528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47667f6e2e41adf7%3A0xa85f0abc58bedd95!2sVelikopoljska%20ul.%2022a%2C%2010000%2C%20Veliko%20Polje%2C%20Croatia!5e0!3m2!1sen!2sus!4v1780252780141!5m2!1sen!2sus" width="100%" height="100%" style="border:0;min-height:220px;display:block;filter:saturate(0.3) brightness(0.8)" allowfullscreen loading="lazy"></iframe>
       </div>
     </div>
   </div>
 </section>
 
-<!-- BOOKING MODAL -->
+<!-- ═══ BOOKING MODAL ═══ -->
 <div class="modal-overlay" id="bookingModal" onclick="if(event.target===this)closeBooking()">
   <div class="modal">
     <button class="modal__close" onclick="closeBooking()" aria-label="Zatvori">✕</button>
     <div class="modal__title">Rezerviraj vožnju</div>
     <div class="modal__sub">Odaberi opcije i pošalji nam WhatsApp poruku</div>
-
     <div class="modal__group">
       <label class="modal__label">Tip quada</label>
-      <div class="modal__toggle" id="typeToggle">
-        <button class="modal__toggle-btn active" data-type="adult" onclick="setType('adult')">
-          Odrasli<span class="toggle-price">550cc</span>
-        </button>
-        <button class="modal__toggle-btn" data-type="kids" onclick="setType('kids')">
-          Dječji<span class="toggle-price">90cc</span>
-        </button>
+      <div class="modal__toggle modal__toggle--3" id="typeToggle">
+        <button class="modal__toggle-btn active" data-type="standard" onclick="setType('standard')">Standard<span class="toggle-price">550-650cc</span></button>
+        <button class="modal__toggle-btn" data-type="linhai1000" onclick="setType('linhai1000')">Linhai 1000<span class="toggle-price">1000cc</span></button>
+        <button class="modal__toggle-btn" data-type="kids" onclick="setType('kids')">Dječji<span class="toggle-price">6+ god</span></button>
       </div>
     </div>
-
     <div class="modal__group">
       <label class="modal__label">Trajanje</label>
       <div class="modal__toggle" id="durationToggle">
-        <button class="modal__toggle-btn active" data-dur="half" onclick="setDuration('half')">
-          Pola dana<span class="toggle-price" id="halfPrice">€80</span>
-        </button>
-        <button class="modal__toggle-btn" data-dur="full" onclick="setDuration('full')">
-          Cijeli dan<span class="toggle-price" id="fullPrice">€150</span>
-        </button>
+        <button class="modal__toggle-btn active" data-dur="half" onclick="setDuration('half')">Pola dana<span class="toggle-price" id="halfPrice">€100</span></button>
+        <button class="modal__toggle-btn" data-dur="full" onclick="setDuration('full')">Cijeli dan<span class="toggle-price" id="fullPrice">€150</span></button>
       </div>
     </div>
-
     <div class="modal__group">
       <label class="modal__label">Datum</label>
       <input type="date" class="modal__input" id="bookDate">
     </div>
-
     <div class="modal__group">
       <label class="modal__label">Broj quadova</label>
       <div class="modal__stepper">
@@ -1912,194 +402,74 @@ a { color: inherit; text-decoration: none; }
         <button class="modal__stepper-btn" onclick="changeCount(1)">+</button>
       </div>
     </div>
-
-    <div class="modal__summary" id="bookingSummary">
-      <div class="modal__summary-row"><span>Quad</span><span id="sumType">Odrasli 550cc</span></div>
+    <div class="modal__summary">
+      <div class="modal__summary-row"><span>Quad</span><span id="sumType">Quad (Segway / Linhai 550 / 650)</span></div>
       <div class="modal__summary-row"><span>Trajanje</span><span id="sumDur">Pola dana (6h)</span></div>
       <div class="modal__summary-row"><span>Quadova</span><span id="sumCount">1</span></div>
-      <div class="modal__summary-total"><span>Ukupno</span><span id="sumTotal">€80</span></div>
+      <div class="modal__summary-total"><span>Ukupno</span><span id="sumTotal">€100</span></div>
     </div>
-
-    <button class="btn btn--accent modal__wa-btn" onclick="sendWhatsApp()">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.61.61l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.317 0-4.46-.768-6.184-2.064l-.432-.326-2.642.886.886-2.642-.326-.432A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    <button class="btn btn--accent btn--block" onclick="sendWhatsApp()" style="padding:0.85rem;font-size:0.85rem">
+      <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.61.61l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.317 0-4.46-.768-6.184-2.064l-.432-.326-2.642.886.886-2.642-.326-.432A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
       Pošalji WhatsApp poruku
     </button>
-    <p class="modal__note">Poruka se otvara u WhatsAppu s vašim odabirom. Mi potvrđujemo u minutama.</p>
+    <p class="modal__note">Poruka se otvara u WhatsAppu s vašim odabirom. Potvrđujemo u minutama.</p>
   </div>
 </div>
 
-<!-- FOOTER -->
+<!-- ═══ FOOTER ═══ -->
 <footer class="footer">
   <div class="container">
     <div class="footer__top">
       <div class="footer__brand">
-        <div class="nav__logo">QUAD RENT ZAGREB <small>Quad avanture · okolica Zagreba</small></div>
-        <p>Quad avanture za obitelji, parove i grupe u okolici Zagreba. Nova vozila, oprema uključena, 15+ ruta.</p>
+        <a href="index.html" class="nav__logo">Quad Rent Zagreb<small>Najam quadova · okolica Zagreba</small></a>
+        <p>10 novih quadova za obitelji, parove, ekipe i teambuilding u okolici Zagreba. 16 godina iskustva u auto-industriji.</p>
       </div>
       <div>
-        <div class="footer__col-title">Navigacija</div>
-        <ul class="footer__links"><li><a href="#vehicle">Quad</a></li><li><a href="#kids">Obitelj</a></li><li><a href="#pricing">Cijene</a></li><li><a href="#routes">Rute</a></li><li><a href="#gallery">Galerija</a></li></ul>
+        <div class="footer__col-title">Stranice</div>
+        <ul class="footer__links">
+          <li><a href="quad.html">Flota</a></li>
+          <li><a href="obitelj.html">Obitelj</a></li>
+          <li><a href="cijene.html">Cijene</a></li>
+          <li><a href="rute.html">Rute</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
       </div>
       <div>
         <div class="footer__col-title">Info</div>
-        <ul class="footer__links"><li><a href="#faq">Pitanja</a></li><li><a href="#contact">Kontakt</a></li><li><a href="#">Privatnost</a></li><li><a href="#">Uvjeti</a></li></ul>
+        <ul class="footer__links">
+          <li><a href="faq.html">Pitanja</a></li>
+          <li><a href="kontakt.html">Kontakt</a></li>
+          <li><a href="#">Privatnost</a></li>
+          <li><a href="#">Uvjeti</a></li>
+        </ul>
       </div>
       <div>
-        <div class="footer__col-title">Pratite nas</div>
-        <div class="footer__socials"><a href="#">IG</a><a href="#">TT</a><a href="#">YT</a><a href="#">FB</a></div>
+        <div class="footer__col-title">Kontakt</div>
+        <ul class="footer__links">
+          <li><a href="https://wa.me/385955442541">WhatsApp</a></li>
+          <li><a href="tel:+385955442541">+385 95 544 2541</a></li>
+          <li style="font-size:0.58rem;color:var(--text-4);margin-top:0.3rem">Pon-Ned 07-22h</li>
+        </ul>
+        <div class="footer__socials mt-2">
+          <a href="#">IG</a><a href="#">TT</a><a href="#">YT</a><a href="#">FB</a>
+        </div>
       </div>
     </div>
     <div class="footer__bottom">
       <p>© 2026 Quad Rent Zagreb. Sva prava pridržana.</p>
-      <p>Velikopoljska 22A, Veliko Polje, Novi Zagreb</p>
+      <p>Velikopoljska 22A, Veliko Polje, 10010 Zagreb</p>
     </div>
   </div>
 </footer>
 
-<script>
-// NAV
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 60));
-
-// MOBILE MENU
-function toggleMenu() {
-  const mm = document.getElementById('mm');
-  const open = mm.classList.toggle('open');
-  document.body.style.overflow = open ? 'hidden' : '';
-}
-
-// FAQ
-function togFaq(b) {
-  const item = b.parentElement;
-  const wasOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq__item').forEach(i => i.classList.remove('open'));
-  if (!wasOpen) item.classList.add('open');
-}
-
-// SCROLL REVEAL
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
-}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-// ═══ BOOKING MODAL ═══
-const prices = {
-  adult: { half: 80, full: 150 },
-  kids:  { half: 60, full: 120 }
-};
-
-const typeLabels = { adult: 'Odrasli 550cc', kids: 'Dječji 90cc' };
-const durLabels  = { half: 'Pola dana (6h)', full: 'Cijeli dan (12h)' };
-
-let booking = {
-  type: 'adult',
-  duration: 'half',
-  count: 1,
-  date: ''
-};
-
-// Set default date to tomorrow
-const tomorrow = new Date();
-tomorrow.setDate(tomorrow.getDate() + 1);
-document.getElementById('bookDate').value = tomorrow.toISOString().split('T')[0];
-document.getElementById('bookDate').min = new Date().toISOString().split('T')[0];
-booking.date = document.getElementById('bookDate').value;
-
-document.getElementById('bookDate').addEventListener('change', function() {
-  booking.date = this.value;
-});
-
-function openBooking(type, duration) {
-  booking.type = type || 'adult';
-  booking.duration = duration || 'half';
-  booking.count = 1;
-
-  // Update UI toggles
-  setType(booking.type);
-  setDuration(booking.duration);
-  document.getElementById('countVal').textContent = booking.count;
-
-  // Open modal
-  document.getElementById('bookingModal').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeBooking() {
-  document.getElementById('bookingModal').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-function setType(type) {
-  booking.type = type;
-  document.querySelectorAll('#typeToggle .modal__toggle-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.type === type);
-  });
-  updatePriceDisplay();
-  updateSummary();
-}
-
-function setDuration(dur) {
-  booking.duration = dur;
-  document.querySelectorAll('#durationToggle .modal__toggle-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.dur === dur);
-  });
-  updateSummary();
-}
-
-function updatePriceDisplay() {
-  document.getElementById('halfPrice').textContent = '€' + prices[booking.type].half;
-  document.getElementById('fullPrice').textContent = '€' + prices[booking.type].full;
-}
-
-function changeCount(delta) {
-  booking.count = Math.max(1, Math.min(10, booking.count + delta));
-  document.getElementById('countVal').textContent = booking.count;
-  updateSummary();
-}
-
-function updateSummary() {
-  const unitPrice = prices[booking.type][booking.duration];
-  const total = unitPrice * booking.count;
-
-  document.getElementById('sumType').textContent = typeLabels[booking.type];
-  document.getElementById('sumDur').textContent = durLabels[booking.duration];
-  document.getElementById('sumCount').textContent = booking.count;
-  document.getElementById('sumTotal').textContent = '€' + total;
-}
-
-function formatDate(dateStr) {
-  if (!dateStr) return 'nije odabran';
-  const d = new Date(dateStr + 'T00:00:00');
-  const days = ['nedjelja','ponedjeljak','utorak','srijeda','četvrtak','petak','subota'];
-  const months = ['siječnja','veljače','ožujka','travnja','svibnja','lipnja','srpnja','kolovoza','rujna','listopada','studenoga','prosinca'];
-  return days[d.getDay()] + ', ' + d.getDate() + '. ' + months[d.getMonth()] + ' ' + d.getFullYear() + '.';
-}
-
-function sendWhatsApp() {
-  const date = document.getElementById('bookDate').value;
-  const unitPrice = prices[booking.type][booking.duration];
-  const total = unitPrice * booking.count;
-
-  const quadType = booking.type === 'adult' ? 'Odrasli quad (Linhai 550cc)' : 'Dječji quad (90cc)';
-  const dur = booking.duration === 'half' ? 'Pola dana (6h)' : 'Cijeli dan (12h)';
-  const dateFormatted = formatDate(date);
-
-  let msg = 'Bok! Želim rezervirati quad vožnju:\n\n';
-  msg += '🏍 Quad: ' + quadType + '\n';
-  msg += '⏱ Trajanje: ' + dur + '\n';
-  msg += '📅 Datum: ' + dateFormatted + '\n';
-  msg += '👥 Broj quadova: ' + booking.count + '\n';
-  msg += '💰 Ukupno: €' + total + '\n\n';
-  msg += 'Molim potvrdu dostupnosti. Hvala!';
-
-  const encoded = encodeURIComponent(msg);
-  window.open('https://wa.me/385955442541?text=' + encoded, '_blank');
-}
-
-// Close modal on Escape
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeBooking();
-});
-</script>
+<script src="main.js"></script>
+<!-- CTA grid responsive -->
+<style>
+  .kids-teaser-grid{grid-template-columns:1fr !important}
+  @media(min-width:700px){
+    .kids-teaser-grid{grid-template-columns:1.1fr 1fr !important}
+    #cta-grid{grid-template-columns:1fr 1fr !important}
+  }
+</style>
 </body>
 </html>
